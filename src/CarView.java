@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
+public class CarView extends JFrame {
+    public static final int X = 800;
+    public static final int Y = 800;
 
     // The controller member
     CarController carC;
@@ -25,28 +25,28 @@ public class CarView extends JFrame{
     JPanel controlPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
+    JSpinner gasSpinner;
+    int gasAmount = 50;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
+    JButton leftButton = new JButton("← Turn left ←");
+    JButton rightButton = new JButton("→ Turn right →");
     JButton turboOnButton = new JButton("Saab Turbo on");
     JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String framename, CarController cc) {
         this.carC = cc;
         initComponents(framename);
     }
 
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
+    // TODO: Take a good look and make sure you understand (roughly) how these methods and components work
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -55,18 +55,14 @@ public class CarView extends JFrame{
 
         this.add(drawPanel);
 
-
-
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(0, //initial value
+                new SpinnerNumberModel(gasAmount, //initial value
                         0, //min
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
+        gasSpinner.addChangeListener(e -> {
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
         });
 
         gasPanel.setLayout(new BorderLayout());
@@ -79,10 +75,10 @@ public class CarView extends JFrame{
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(brakeButton, 2);
+        controlPanel.add(turboOffButton, 3);
+        controlPanel.add(leftButton, 4);
+        controlPanel.add(rightButton, 5);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -101,14 +97,11 @@ public class CarView extends JFrame{
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
-            }
+        gasButton.addActionListener(e -> {
+            carC.gas(gasAmount);
         });
 
-        // Make the frame pack all it's components by respecting the sizes if possible.
+        // Make the panel layout more compact
         this.pack();
 
         // Get the computer screen resolution
