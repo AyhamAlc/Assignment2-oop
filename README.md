@@ -1,3 +1,3 @@
-# laboration-2
+# DIT044 Assignment 2
 
-Se Canvas för instruktioner.
+Se Canvas for instructions
