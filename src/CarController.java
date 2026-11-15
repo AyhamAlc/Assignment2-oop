@@ -18,8 +18,8 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // A list of cars, modify if needed
-    ArrayList<ACar> cars = new ArrayList<>();
+    // TODO A list of cars, modify if needed
+    ArrayList<Car> cars = new ArrayList<>();
 
     public void startTimer() {
         this.timer.start();
@@ -31,7 +31,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             /*
-            for (ACar car : cars) {
+            for (Car car : cars) {
                 car.move();
                 int x = (int) Math.round(car.getPosition().getX());
                 int y = (int) Math.round(car.getPosition().getY());
@@ -47,7 +47,7 @@ public class CarController {
     void gas(int amount) {
         /* TODO adapt to your needs
         double gas = ((double) amount) / 100;
-        for (ACar car : cars) {
+        for (Car car : cars) {
             car.gas(gas);
         }
         */
