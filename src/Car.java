@@ -47,13 +47,18 @@ public abstract class Car implements Movable {
     public double getPosX() { return posX; }
     public double getPosY() { return posY; }
 
+    public void setPosition(double x, double y){
+        posX = x;
+        posY = y;
+    }
+
 
     // private so that the only way for outside code to change the speed is with gas and brake
     private void incrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
     private void decrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
 

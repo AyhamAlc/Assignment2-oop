@@ -28,28 +28,82 @@ public class CarController {
     /* Each step, the TimerListener moves all cars in the list and tells the
      * view to update its images. TODO Change this method to your needs.
      */
+    private final int maxX = 800 - 100;
+    private final int maxY = (800 - 240) -60;
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            /*
             for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
+                int x = (int) Math.round(car.getPosX());
+                int y = (int) Math.round(car.getPosY());
+                // Stay within field
+                if( x < 0 || x > maxX || y < 0 || y > maxY){
+                    // Clamp makes it so that if value is below min (value, min, max) it returns min, if above max returns max
+                    car.setPosition(Math.clamp(x, 0, maxX), Math.clamp(y, 0, maxY));
+                    //we turn left twice to turn 180 degrees, could also use turn right
+                    car.turnLeft();
+                    car.turnLeft();
+                }
+
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.revalidate();
                 frame.drawPanel.repaint();
             }
-             */
         }
     }
 
     void gas(int amount) {
-        /* TODO adapt to your needs
         double gas = ((double) amount) / 100;
         for (Car car : cars) {
             car.gas(gas);
         }
-        */
+    }
+
+    void brake(int amount){
+        double brake = ((double) amount /100);
+        for (Car car : cars) {
+            car.brake(brake);
+        }
+    }
+
+    void turnLeft(){
+        for (Car car : cars){
+            car.turnLeft();
+        }
+    }
+
+    void turnRight(){
+        for (Car car : cars){
+            car.turnRight();
+        }
+    }
+
+    void startAllCars(){
+        for (Car car : cars){
+            car.startEngine();
+        }
+    }
+
+    void stopAllCars(){
+        for (Car car : cars){
+            car.stopEngine();
+        }
+    }
+
+    void turboOn(){
+        for (Car car : cars){
+            if(car instanceof Saab95 saab){
+                saab.setTurboOn();
+            }
+        }
+    }
+
+    void turboOff(){
+        for (Car car : cars){
+            if(car instanceof Saab95 saab){
+                saab.setTurboOff();
+            }
+        }
     }
 }

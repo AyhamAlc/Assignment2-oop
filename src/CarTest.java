@@ -64,7 +64,13 @@ public class CarTest {
         carPointLocation();
         gasTest();
         brakeTest();
-
+        /*
+        Volvo240 v = new Volvo240();
+        for (int i = 0; i < 1000; i++) {
+            v.gas(1);
+        }
+        System.out.println(v.getCurrentSpeed());
+        */
         //TODO: add and run more test
     }
 }
