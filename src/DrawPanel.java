@@ -17,7 +17,6 @@ public class DrawPanel extends JPanel {
 
     // TODO: Make this general for all cars
     void moveit(Car car, int x, int y) {
-
         if(car instanceof  Saab95){
             saabPoint.x = x;
             saabPoint.y = y;

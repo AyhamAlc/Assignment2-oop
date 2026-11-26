@@ -41,8 +41,10 @@ public class CarController {
                     // Clamp makes it so that if value is below min (value, min, max) it returns min, if above max returns max
                     car.setPosition(Math.clamp(x, 0, maxX), Math.clamp(y, 0, maxY));
                     //we turn left twice to turn 180 degrees, could also use turn right
+                    car.stopEngine();
                     car.turnLeft();
                     car.turnLeft();
+                    car.startEngine();
                 }
 
                 frame.drawPanel.moveit(car, x, y);
